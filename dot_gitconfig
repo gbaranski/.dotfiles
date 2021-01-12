@@ -1,0 +1,8 @@
+[user]
+	signingkey = 6C7DD7183CD3632D
+	name = gbaranski
+	email = gbaranski19@gmail.com
+[init]
+	defaultBranch = master
+[alias]
+	sla = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
