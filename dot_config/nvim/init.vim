@@ -6,6 +6,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree' " this nice tree
 Plug 'tpope/vim-repeat' " improves repeat
 Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator' " integration with tmux
 
 Plug 'tpope/vim-surround' " parentheses, brackets, quotes, XML tags
 Plug 'tpope/vim-commentary' " add comments using gcc command 
