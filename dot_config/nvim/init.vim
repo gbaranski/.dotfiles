@@ -9,6 +9,7 @@ Plug 'nvim-lua/completion-nvim' " Add auto competion
 Plug 'tpope/vim-surround' " parentheses, brackets, quotes, XML tags
 Plug 'tpope/vim-commentary' " add comments using gcc command 
 Plug 'wakatime/vim-wakatime'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " APPEARENCE
 Plug 'joshdick/onedark.vim'
@@ -18,6 +19,14 @@ call plug#end()
 lua << EOF
 lspconfig = require "lspconfig"
 completion = require "completion"
+treesitter = require "nvim-treesitter.configs"
+
+treesitter.setup {
+  ensure_installed = "all",     
+  highlight = {
+    enable = true              
+  },
+}
 
 lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
