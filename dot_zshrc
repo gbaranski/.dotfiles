@@ -10,12 +10,26 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+export OPENSSL_LIBRARIES=/usr/local/opt/openssl/lib 
+
 export GPG_TTY=$(tty)
+
+# For SDL2
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Fix python fucking piece of shit
 alias python="python3"
 
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
 
 # Clangd and others
 export PATH=$PATH:/usr/local/opt/llvm/bin/
