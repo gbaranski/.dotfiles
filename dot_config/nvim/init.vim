@@ -4,12 +4,14 @@ Plug 'neovim/nvim-lspconfig'
 
 " MISC
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator' " integration with tmux
 Plug 'nvim-lua/completion-nvim' " Add auto competion
 Plug 'tpope/vim-surround' " parentheses, brackets, quotes, XML tags
 Plug 'tpope/vim-commentary' " add comments using gcc command 
-Plug 'wakatime/vim-wakatime'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'wakatime/vim-wakatime' " tracking
+Plug 'nvim-treesitter/nvim-treesitter' " improve syntax highlighting
+Plug 'jiangmiao/auto-pairs' " Automatic pairs
 
 " APPEARENCE
 Plug 'joshdick/onedark.vim'
@@ -84,6 +86,15 @@ end
 
 
 
+lspconfig.clangd.setup{
+  on_attach = on_attach
+}
+lspconfig.rust_analyzer.setup{
+  on_attach = on_attach
+}
+lspconfig.tsserver.setup{
+  on_attach = on_attach
+}
 lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   on_attach = on_attach
@@ -108,17 +119,6 @@ function goimports(timeoutms)
   vim.lsp.buf.formatting()
 end
 EOF
-
-" LSP Config
-" nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-" nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 " Hide netrw banner
 let g:netrw_banner = 0
@@ -145,6 +145,9 @@ let g:onedark_terminal_italics = 1
 colorscheme onedark
 
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+
+" Enable fuzzy finder
+nnoremap <silent> <C-f> :Files<CR>
 
 " Fix to use system clipboard
 set clipboard=unnamedplus
