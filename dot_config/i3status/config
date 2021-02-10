@@ -1,0 +1,66 @@
+general {
+    output_format = "i3bar"
+    colors = true
+    
+}
+
+order += "disk /"
+order += "wireless wlan0"
+order += "ethernet enp2s0"
+order += "battery 1"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "memory"
+order += "volume master"
+order += "time"
+
+
+disk "/" {
+        format = "%free"
+}
+
+wireless wlan0 {
+        format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
+        format_down = "W: down"
+}
+ethernet enp2s0 {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+battery 1 {
+        format = "%status %percentage %consumption"
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_unk = "? UNK"
+        status_full = "☻ FULL"
+        path = "/sys/class/power_supply/BAT1/uevent"
+        low_threshold = 20
+}
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+        max_threshold = 50
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+cpu_usage {
+  format = "CPU: %usage"
+  max_threshold = 75
+  degraded_threshold = 50
+}
+
+memory {
+        format = "%used/%total"
+        threshold_degraded = "30%"
+        threshold_critical = "10%"
+}
+
+time {
+  format = "%Y-%m-%d %H:%M:%S"
+}
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "pulse:1"
+}
