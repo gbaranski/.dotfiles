@@ -10,7 +10,7 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+export GTK_THEME=Adwaita:dark
 
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
 export OPENSSL_LIBRARIES=/usr/local/opt/openssl/lib 
@@ -20,6 +20,10 @@ export GPG_TTY=$(tty)
 # For SDL2
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
 
+# Add ~/bin to path
+export PATH=$PATH:$HOME/bin
+
+# Setup Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
