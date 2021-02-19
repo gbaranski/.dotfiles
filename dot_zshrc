@@ -17,9 +17,6 @@ export OPENSSL_LIBRARIES=/usr/local/opt/openssl/lib
 
 export GPG_TTY=$(tty)
 
-# For SDL2
-export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib"
-
 # Add ~/bin to path
 export PATH=$PATH:$HOME/bin
 

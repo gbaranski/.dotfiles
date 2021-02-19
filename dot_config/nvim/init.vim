@@ -12,6 +12,7 @@ Plug 'tpope/vim-commentary' " add comments using gcc command
 Plug 'wakatime/vim-wakatime' " tracking
 Plug 'nvim-treesitter/nvim-treesitter' " improve syntax highlighting
 Plug 'jiangmiao/auto-pairs' " Automatic pairs
+Plug 'preservim/nerdtree'
 
 " APPEARENCE
 Plug 'joshdick/onedark.vim'
@@ -120,8 +121,16 @@ function goimports(timeoutms)
 end
 EOF
 
-" Hide netrw banner
-let g:netrw_banner = 0
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" Use ripgrep
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " set completeopt-=preview
 autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
@@ -150,7 +159,8 @@ autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 nnoremap <silent> <C-f> :Files<CR>
 
 " Fix to use system clipboard
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
+
 
 set number relativenumber
 set nu rnu
