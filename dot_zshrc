@@ -17,6 +17,8 @@ export OPENSSL_LIBRARIES=/usr/local/opt/openssl/lib
 
 export GPG_TTY=$(tty)
 
+export PATH=$PATH:$HOME/.npm-global/bin
+
 # Add ~/bin to path
 export PATH=$PATH:$HOME/bin
 
@@ -144,3 +146,9 @@ source $ZSH/oh-my-zsh.sh
 # Lines configured by zsh-newuser-install
 bindkey -v
 # End of lines configured by zsh-newuser-install
+
+PATH="/home/gbaranski/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/gbaranski/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/gbaranski/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/gbaranski/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/gbaranski/perl5"; export PERL_MM_OPT;

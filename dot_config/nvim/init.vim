@@ -37,7 +37,7 @@ treesitter.setup {
 
 
 local on_attach = function(client, bufnr)
-  completion.on_attach()
+  completion.on_attach(client)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -82,10 +82,6 @@ local on_attach = function(client, bufnr)
     ]], false)
   end
 end
-
-
-
-
 
 lspconfig.clangd.setup{
   on_attach = on_attach

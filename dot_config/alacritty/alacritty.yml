@@ -22,5 +22,5 @@ colors:
 
 font:
   normal:
-    family: JetBrains Mono
-    style: Regular
+    family: Iosevka
+    size: 13.5
