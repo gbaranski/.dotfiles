@@ -28,6 +28,7 @@ output * bg ~/images/background.jpg fill
 output X11-1 mode 1920x1080@144Hz
 output * scale 1.2
 exec /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.7 --focused-opacity 0.97 --focused-appid Alacritty
+exec waybar
 
 input "1267:12410:ELAN1203:00_04F3:307A_Touchpad" {
     tap enabled
