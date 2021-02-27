@@ -1,41 +1,148 @@
 call plug#begin()
-" LSP
-Plug 'neovim/nvim-lspconfig'
+" ========================================================================
+" Support for languagues
+" ========================================================================
+Plug 'neovim/nvim-lspconfig' " NVIM Dev auto completion
+Plug 'nvim-lua/completion-nvim' " Add auto competion
+" ========================================================================
 
-" MISC
+" ========================================================================
+" File Navigation
+" ========================================================================
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'christoomey/vim-tmux-navigator' " integration with tmux
-Plug 'nvim-lua/completion-nvim' " Add auto competion
-Plug 'tpope/vim-surround' " parentheses, brackets, quotes, XML tags
-Plug 'tpope/vim-commentary' " add comments using gcc command 
-Plug 'wakatime/vim-wakatime' " tracking
 Plug 'nvim-treesitter/nvim-treesitter' " improve syntax highlighting
-Plug 'jiangmiao/auto-pairs' " Automatic pairs
 Plug 'preservim/nerdtree'   " File navigation
+" ========================================================================
+
+
+" ========================================================================
+" Misc
+" ========================================================================
+Plug 'jiangmiao/auto-pairs' " Automatic pairs
+Plug 'tpope/vim-commentary' " add comments using gcc command 
+Plug 'tpope/vim-surround' " parentheses, brackets, quotes, XML tags
+" ========================================================================
+
+" ========================================================================
+" Tracking
+" ========================================================================
+Plug 'wakatime/vim-wakatime'
+" ========================================================================
+
+" ========================================================================
+" External Applications
+" ========================================================================
+Plug 'christoomey/vim-tmux-navigator' " integration with tmux
+" ========================================================================
+
+" ========================================================================
+" Appereance
+" ========================================================================
+Plug 'joshdick/onedark.vim' " Theme
 Plug 'airblade/vim-gitgutter' " Git diff
-'
-" APPEARENCE
-Plug 'joshdick/onedark.vim'
+" ========================================================================
 
 call plug#end()
 
+
+" ========================================================================
+" File navigation
+" ========================================================================
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+
+" Use ripgrep
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" Enable fuzzy finder
+nnoremap <silent> <C-f> :Files<CR>
+" ========================================================================
+
+
+" ========================================================================
+" LSP Autocompletion
+" ========================================================================
+set completeopt-=preview
+autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd BufWritePre *.go lua goimports(1000)
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+" ========================================================================
+
+
+
+
+" ========================================================================
+" Apperance
+" ========================================================================
+syntax enable
+let g:onedark_termcolors = 256
+let g:onedark_terminal_italics = 1
+colorscheme onedark
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+" ========================================================================
+
+
+" ========================================================================
+" Misc
+" ========================================================================
+set clipboard+=unnamedplus " Use system clipboard
+set number relativenumber
+set nu rnu
+set noswapfile
+set autoindent
+set tabstop=2 shiftwidth=2 expandtab
+" TextEdit might fail if hidden is not set.
+set hidden
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+" Give more space for displaying messages.
+set cmdheight=2
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+" ========================================================================
+
+
+
+" ========================================================================
+" LSP Configuration
+" ========================================================================
 lua << EOF
 lspconfig = require "lspconfig"
 completion = require "completion"
 treesitter = require "nvim-treesitter.configs"
 
-
-
+-- Setup treesitter
 treesitter.setup {
   ensure_installed = "all",     
   highlight = {
     enable = true              
   },
 }
-
-
-
 
 local on_attach = function(client, bufnr)
   completion.on_attach(client)
@@ -117,73 +224,4 @@ function goimports(timeoutms)
   vim.lsp.buf.formatting()
 end
 EOF
-
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-
-" Use ripgrep
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
-
-" set completeopt-=preview
-autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd BufWritePre *.go lua goimports(1000)
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
-" set theme
-syntax enable
-let g:onedark_termcolors = 256
-let g:onedark_terminal_italics = 1
-" set termguicolors
-colorscheme onedark
-
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
-
-" Enable fuzzy finder
-nnoremap <silent> <C-f> :Files<CR>
-
-" Fix to use system clipboard
-set clipboard+=unnamedplus
-
-
-set number relativenumber
-set nu rnu
-set noswapfile
-set autoindent
-set tabstop=2 shiftwidth=2 expandtab
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+" ========================================================================
