@@ -10,13 +10,22 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# enable wayland in firefox
+export MOZ_ENABLE_WAYLAND=1
+# Remove decorations in wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
 export GTK_THEME=Adwaita:dark
 
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
 export OPENSSL_LIBRARIES=/usr/local/opt/openssl/lib 
+# export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
 
 export GPG_TTY=$(tty)
 
+export PATH=$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:$HOME/.npm-global/bin
 
 # Add ~/bin to path

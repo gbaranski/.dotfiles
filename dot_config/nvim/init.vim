@@ -12,8 +12,9 @@ Plug 'tpope/vim-commentary' " add comments using gcc command
 Plug 'wakatime/vim-wakatime' " tracking
 Plug 'nvim-treesitter/nvim-treesitter' " improve syntax highlighting
 Plug 'jiangmiao/auto-pairs' " Automatic pairs
-Plug 'preservim/nerdtree'
-
+Plug 'preservim/nerdtree'   " File navigation
+Plug 'airblade/vim-gitgutter' " Git diff
+'
 " APPEARENCE
 Plug 'joshdick/onedark.vim'
 

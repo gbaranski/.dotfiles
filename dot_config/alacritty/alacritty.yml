@@ -22,5 +22,6 @@ colors:
 
 font:
   normal:
-    family: Iosevka
-    size: 13.5
+    family: Jetbrains Mono
+
+# background_opacity: 0.9
