@@ -1,0 +1,122 @@
+# ========================================================================
+# ALIASES
+# ========================================================================
+alias ls="exa" # LS alternative, sudo pacman -S exa
+# ========================================================================
+
+
+# ========================================================================
+# FIX LOCALES
+# ========================================================================
+export LC_CTYPE="en_US.UTF8"
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+# ========================================================================
+
+
+{{ if eq .chezmoi.os "linux" }}
+# ========================================================================
+# LINUX SPECIFIC
+# ========================================================================
+export GTK_THEME=Adwaita:dark # Set GTK Theme
+# ========================================================================
+# WAYLAND SPECIFIC
+# ========================================================================
+{{ if .wayland }}
+export MOZ_ENABLE_WAYLAND=1                  # Wayland native support in Firefox
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Remove decorations
+{{ end }}
+# ========================================================================
+{{ end }}
+
+
+# ========================================================================
+# HISTORY
+# ========================================================================
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+HISTFILE=$HOME/.zsh_history
+SAVEHIST=100000 # Set history size to 10k
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances of the shell
+# ========================================================================
+
+
+# ========================================================================
+# MISC
+# ========================================================================
+setopt promptsubst # Most themes use this option
+# ========================================================================
+
+
+# ========================================================================
+# VI MODE
+# ========================================================================
+set -o vi           # Enable VI Mode
+export KEYTIMEOUT=1 # Reduce latency when pressing <Esc>
+# ========================================================================
+
+
+# ========================================================================
+# AUTO COMPLETION
+# ========================================================================
+autoload -Uz compinit
+typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [ $(date +'%j') != $updated_at ]; then
+  compinit -i
+else
+  compinit -C -i
+fi
+zmodload -i zsh/complist
+setopt auto_list # automatically list choices on ambiguous completion
+setopt auto_menu # automatically use menu completion
+setopt always_to_end # move cursor to end if word had one match
+zstyle ':completion:*' menu select # select completions with arrow keys
+zstyle ':completion:*' group-name '' # group results by category
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+zstyle :prompt:pure:git:stash show yes
+# ========================================================================
+
+
+# ========================================================================
+# ZINIT
+# ========================================================================
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+# ========================================================================
+
+
+# ========================================================================
+# PACKAGES
+# ========================================================================
+zinit wait lucid for \
+        OMZL::git.zsh \
+  atload"unalias grv" \
+        OMZP::git
+
+PS1="READY >" # provide a simple prompt till the theme loads
+zinit wait'!' lucid for \
+    OMZL::prompt_info_functions.zsh \
+    OMZT::af-magic
+
+zinit wait lucid for \
+  atinit"zicompinit; zicdreplay"  \
+        zdharma/fast-syntax-highlighting
+# ========================================================================
