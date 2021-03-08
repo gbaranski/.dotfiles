@@ -7,7 +7,7 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -25,14 +25,13 @@ set $menu wofi --show drun
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg ~/images/background.jpg fill
-output X11-1 mode 1920x1080@144Hz
 # output * scale 1.2
-exec /usr/share/sway/scripts/inactive-windows-transparency.py --opacity 0.7 --focused-opacity 0.97 --focused-appid Alacritty
+exec inactive-windows-transparency.py
 exec waybar
 
 default_border none
 
-input "1267:12410:ELAN1203:00_04F3:307A_Touchpad" {
+input "1739:30383:CUST0001:00_06CB:76AF_Touchpad" {
     tap enabled
     drag disabled
 }
