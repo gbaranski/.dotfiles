@@ -100,6 +100,12 @@ autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 " ========================================================================
 " Misc
 " ========================================================================
+" Disable arrows
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 set clipboard+=unnamedplus " Use system clipboard
 set number relativenumber
 set nu rnu
