@@ -1,3 +1,4 @@
 setxkbmap -option ctrl:nocaps pl
+picom --experimental-backends &
 xrdb -merge ~/.Xresources
 exec i3
