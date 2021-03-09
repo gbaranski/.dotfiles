@@ -24,7 +24,7 @@ set $menu wofi --show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/images/background.jpg fill
+output * bg ~/images/wallpaper.jpg fill
 # output * scale 1.2
 exec inactive-windows-transparency.py
 exec waybar
