@@ -1,102 +1,159 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Ubuntu Nerd Font";
-    font-size: 13px;
-    min-height: 0;
+  border:        none;
+  border-radius: 0;
+  font-family:   Sans;
+  font-size:     15px;
+  box-shadow:    none;
+  text-shadow:   none;
+  transition-duration: 0s;
 }
 
-window#waybar {
-    background: transparent;
-    color: white;
+window {
+  color:      rgba(217, 216, 216, 1);
+  background: rgba(35, 31, 32, 0.7);
 }
 
-#window {
-    font-weight: bold;
-    font-family: "Ubuntu";
-}
-/*
 #workspaces {
-    padding: 0 5px;
+  margin: 0 5px;
 }
-*/
 
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
-    border-top: 2px solid transparent;
+  padding:    0 5px;
+  color:      rgba(217, 216, 216, 0.4);
+}
+
+#workspaces button.visible {
+  color:      rgba(217, 216, 216, 1);
 }
 
 #workspaces button.focused {
-    color: #c9545d;
-    border-top: 2px solid #c9545d;
+  border-top: 3px solid rgba(217, 216, 216, 1);
+  border-bottom: 3px solid rgba(217, 216, 216, 0);
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+#workspaces button.urgent {
+  color:      rgba(238, 46, 36, 1);
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
-    padding: 0 3px;
-    margin: 0 2px;
+#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #temperature {
+  margin:     0px 6px 0px 10px;
 }
 
-#clock {
-    font-weight: bold;
+/* 
+====================================================
+MEMORY
+====================================================
+ */
+#memory {
+  color: #FFAB91;
+
 }
 
-#battery {
-}
-
-#battery icon {
-    color: red;
-}
-
-#battery.charging {
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
-}
-
-#battery.warning:not(.charging) {
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
+/* 
+====================================================
+CPU
+====================================================
+ */
 
 #cpu {
+  color: #B39DDB;
 }
 
-#memory {
+#cpu.warning {
+  color: #FFB74D;
 }
 
-#network {
+#cpu.critical {
+  color: #B71C1C;
 }
 
-#network.disconnected {
-    background: #f53c3c;
+/* 
+====================================================
+TEMPERATURE
+====================================================
+ */
+
+#temperature {
+  color: #90CAF9;
 }
+#temperature.critical {
+  color: #B71C1C;
+}
+
+/* 
+====================================================
+CLOCK
+====================================================
+ */
+#clock {
+  color: #BCAAA4;
+  margin:     0px 16px 0px 10px;
+  min-width:  140px;
+}
+
+/* 
+====================================================
+PULSEAUDIO
+====================================================
+ */
 
 #pulseaudio {
+  color: #ffcdd2;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+#pulseaudio.bluetooth {
+  color: #3B5998;
 }
 
 #pulseaudio.muted {
+  color: #B71C1C;
 }
 
-#custom-spotify {
-    color: rgb(102, 220, 105);
+/* 
+====================================================
+NETWORK
+====================================================
+ */
+#network.disconnected, #network.ethernet {
+  color: #C8E6C9;
+  font-weight: bold; 
 }
 
-#tray {
+#network.wifi {
+  color: #9fa8da;
 }
 
+/* 
+====================================================
+BATTERY
+====================================================
+ */
+#battery.full {
+  color:      #DCEDC8;
+}
 
+#battery.discharging {
+  color:      #90CAF9;
+}
+
+#battery.charging {
+  color:      #66BB6A;
+}
+
+#battery.warning {
+  color:       #FFB74D;
+}
+
+#battery.critical {
+  color:      #B71C1C;
+}
+
+#custom-storage.warning {
+  color:      rgba(255, 210, 4, 1);
+}
+
+#custom-storage.critical {
+  color:      rgba(238, 46, 36, 1);
+}

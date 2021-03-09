@@ -1,83 +1,90 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar at the bottom of your screen
-    "height": 24, // Waybar height
-    // "width": 1366, // Waybar width
-    // Choose the order of the modules
+  "layer": "bottom",
+    "position": "top",
+    "height": 30,
+
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "battery", "tray", "clock"],
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": false,
-        "format": "{icon}",
-        "format-icons": {
-            "1:web": "",
-            "2:code": "",
-            "3:term": "",
-            "4:work": "",
-            "5:music": "",
-            "6:docs": "",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
+    "modules-right": ["pulseaudio", "network", "cpu","temperature", "memory", "battery", "clock"],
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+      "format": " {}"
     },
-    "tray": {
-        // "icon-size": 21,
-        "spacing": 10
+    "sway/workspaces": {
+      "format": "{name} {icon}",
+      "disable-scroll": true,
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "focused": "",
+        "default": ""
+      }
+    },
+    "sway/window": {
+      "max-length": 80,
+      "tooltip": false
     },
     "clock": {
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% "
-    },
-    "memory": {
-        "format": "{used:0.1f}G/{total:0.1f}G"
+      "format": "{:%a %d %b %H:%M}",
+      "tooltip": false
     },
     "battery": {
-        "bat": "BAT0",
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+      "format": "{capacity}% {icon}",
+      "format-alt": "{time} {icon}",
+      "format-icons": ["", "", "", "", ""],
+      "format-discharging": "BAT {capacity}%  {icon}",
+      "format-full": "FULL {capacity}%  {icon}",
+      "format": "CHR {capacity}%  {icon}",
+      "interval": 30,
+      "states": {
+        "full": 100,
+        "warning": 25,
+        "critical": 10
+      },
+      "tooltip": true
     },
     "network": {
-        // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠"
+      "format": "{ipaddr}  {icon}",
+      "format-wifi": "{essid}  {icon}",
+      "format-disconnected": "No internet  {icon}",
+      "format-icons": {
+        "wifi": [""],
+        "ethernet": [""],
+        "disconnected": ["睊"]
+      },
+      "tooltip": true,
+      "tooltip-format-wifi": "{ifname} - {ipaddr}/{cidr} - {signalStrength}% - {frequency}MHz",
     },
     "pulseaudio": {
-        //"scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-        "on-click": "pavucontrol"
+      "format": "{icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-muted": "婢",
+      "format-icons": {
+        "headphone": "",
+        "headset": "",
+        "default": ["", "", "墳", ""]
+      },
+      "scroll-step": 10,
+      "on-click": "pavucontrol",
+      "tooltip": false
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "interval": 1,
+        "states": {
+          "warning": 30,
+          "critical": 60,
+        }
     },
     "temperature": {
-      "thermal-zone": 10,
-      "format": "{temperatureC}°C ",
-      "critical-threshold": 60,
-      "format-critical": "{temperatureC}°C ",
-    }
+        "thermal-zone": 10,
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C ",
+    },
+    "memory": {
+        "format": "{used:0.1f}G/{total:0.1f}G ",
+    },
 }
-
