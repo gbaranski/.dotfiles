@@ -1,0 +1,36 @@
+window {
+  opacity: 0.9;
+  margin: 5px;
+  background-color: #282C34;
+}
+
+#input {
+  background-color: #212121;
+  border: 1px solid #61AFEF;
+  opacity: 0.7;
+  margin: 10px;
+  font-family: "undefined";
+}
+
+#outer-box {
+  border: 2px solid #61AFEF;
+}
+
+#inner-box {
+  padding-top: 20px;
+}
+
+#entry {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#text {
+  font-family: "undefined";
+  font-size: 16;
+}
+
+#entry:selected {
+  background-color: #61AFEF;
+}
+
