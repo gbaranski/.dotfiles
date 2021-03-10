@@ -21,32 +21,48 @@ chezmoi edit-config
 Add this
 ```toml
 [data]
-  email = "your@email.addr" # Your email address
-  name = "your_name"        # Your name for Git
-  wayland = false           # True if using Wayland, enables Firefox/Chromium native wayland support
+  email = "root@gbaranski.com" # Your email address
+  name = "gbaranski"           # Your name for Git
+  wayland = true               # True if using Wayland, enables Firefox/Chromium native wayland support
 ```
 
-## Dependencies
-#### Neovim
-```
-neovim >= 0.5.0 
-fzf - fuzzy finder
-ripgrep - better dir search
-tree-sitter - syntax highlighting
-```
-#### ZSH
-```
-exa - ls alternative
-zinit - package manager
+## Neovim
+
+**I'm using Neovim 0.5.0 with official LSP Support**
+```zsh
+paru -S neovim-git
 ```
 
-#### Sway
+<h4>Dependencies</h4>
+```zsh
+fzf     # fuzzy finder
+ripgrep # better dir search
 ```
-pactl
-light
-wofi
-alacritty
-waybar
+
+![neovim-screenshot](neovim.png)
+
+## ZSH
+<h4>Dependencies</h4>
+```zsh
+exa   # ls alternative
+zinit # package manager(should be installed automatically)
+```
+
+![zsh-screenshot](zsh.png)
+
+## Sway
+
+Wallpaper **must** be present at ~/images/wallpaper.jpg
+
+```zsh
+pamixer      # Changing volume
+light        # Changing backlight brightness
+wofi         # App launcher
+alacritty    # Terminal emulator
+waybar       # Top bar
+python3-ipc  # Python IPC library for Sway/i3
+playerctl    # Switching songs
+wob          # Nice popup when switching volume/backlight 
 
 ## Verify deps with /usr/share/sway/scripts/grimshot check 
 grim
@@ -57,6 +73,7 @@ jq
 notify-send
 ```
 
-
-### Sway screenshot
 ![sway-ss](sway.png)
+
+![wofi](wofi.png)
+
