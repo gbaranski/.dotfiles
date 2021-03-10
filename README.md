@@ -12,6 +12,20 @@ Add this
   wayland = true               # True if using Wayland, enables Firefox/Chromium native wayland support
 ```
 
+- [Window manager](#window-manager)
+  * [Sway](#sway)
+      - [Wofi](#wofi)
+  * [i3](#i3)
+  * [Tmux](#tmux)
+- [Editor](#editor)
+  * [Neovim](#neovim)
+  * [Vim](#vim)
+- [Shell](#shell)
+  * [ZSH](#zsh)
+- [Terminal emulator](#terminal-emulator)
+  * [Alacritty](#alacritty)
+- [Misc](#misc)
+
 # Window manager
 
 ## Sway
