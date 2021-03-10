@@ -36,11 +36,9 @@
       "format-alt": "{time} {icon}",
       "format-icons": ["", "", "", "", ""],
       "format-discharging": "BAT {capacity}%  {icon}",
-      "format-full": "FULL {capacity}%  {icon}",
       "format": "CHR {capacity}%  {icon}",
       "interval": 30,
       "states": {
-        "full": 100,
         "warning": 25,
         "critical": 10
       },
