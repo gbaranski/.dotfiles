@@ -120,7 +120,7 @@ Shell, Bash alternative with great auto completion
 ```zsh
 # Dependencies
 
-exa   # ls alternative
+lsd   # ls alternative
 zinit # package manager(should be installed automatically)
 ```
 
