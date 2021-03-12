@@ -1,7 +1,7 @@
 # ========================================================================
 # ALIASES
 # ========================================================================
-alias ls="exa" # LS alternative, sudo pacman -S exa
+alias ls="lsd" # LS alternative, sudo pacman -S lsd
 alias python="python3" # Fix python fucking piece of shit
 
 alias gs='git status'
@@ -235,6 +235,7 @@ export EDITOR=nvim
 export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_DEFAULT_OPTS='-m --height 50% --border'
 
+
 # Add HOME/bin to PATH
 export PATH=$PATH:$HOME/bin
 
@@ -256,6 +257,7 @@ export GTK_THEME=Adwaita:dark # Set GTK Theme
 {{ if .wayland }}
 export MOZ_ENABLE_WAYLAND=1                  # Wayland native support in Firefox
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Remove decorations
+export XDG_CURRENT_DESKTOP=sway
 GDK_BACKEND=wayland                          # Force GTK to use wayland
 CLUTTER_BACKEND=wayland
 {{ end }}
