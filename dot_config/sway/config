@@ -46,6 +46,10 @@ input "type:keyboard" {
 
 }
 
+output eDP-1 pos 0 0
+output DP-1 pos 1920 0
+focus_follows_mouse no
+
 for_window [app_id=".*"] opacity 0.9
 for_window [app_id=".*"] border none
 gaps inner 5
