@@ -10,7 +10,7 @@
 
 window {
   color:            #abb2bf;
-  background-color: rgba(40, 44, 52, 0.8)
+  background-color: rgba(40, 40, 40, 0.8)
 }
 
 #workspaces {
@@ -19,7 +19,7 @@ window {
 
 #workspaces button {
   padding:    0 5px;
-  color:      rgba(217, 216, 216, 0.4);
+  color:      rgba(251, 241, 199, 0.4);
 }
 
 #workspaces button.visible {
@@ -45,7 +45,7 @@ MEMORY
 ====================================================
  */
 #memory {
-  color: #FFAB91;
+  color: #458588;
 }
 
 /* 
@@ -55,15 +55,15 @@ CPU
  */
 
 #cpu {
-  color: #B39DDB;
+  color: #8EC07C;
 }
 
 #cpu.warning {
-  color: #FFB74D;
+  color: #FABD2F;
 }
 
 #cpu.critical {
-  color: #B71C1C;
+  color: #FB4934;
 }
 
 /* 
@@ -73,10 +73,10 @@ TEMPERATURE
  */
 
 #temperature {
-  color: #90CAF9;
+  color: #D3869B;
 }
 #temperature.critical {
-  color: #B71C1C;
+  color: #FB4934;
 }
 
 /* 
@@ -85,7 +85,7 @@ CLOCK
 ====================================================
  */
 #clock {
-  color: #BCAAA4;
+  color: #a89984;
   margin:     0px 16px 0px 10px;
   min-width:  140px;
 }
@@ -97,17 +97,17 @@ PULSEAUDIO
  */
 
 #pulseaudio {
-  color: #ffcdd2;
+  color:     #ebdbb2;
   font-size: 18px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 #pulseaudio.bluetooth {
-  color: #3B5998;
+  color: #458588;
 }
 
 #pulseaudio.muted {
-  color: #B71C1C;
+  color: #fb4934;
 }
 
 /* 
@@ -116,12 +116,12 @@ NETWORK
 ====================================================
  */
 #network.disconnected, #network.ethernet {
-  color: #C8E6C9;
+  color: #FB4934;
   font-weight: bold; 
 }
 
 #network.wifi {
-  color: #9fa8da;
+  color: #83a598;
 }
 
 /* 
@@ -129,16 +129,12 @@ NETWORK
 BATTERY
 ====================================================
  */
-#battery.full {
-  color:      #DCEDC8;
-}
-
 #battery.discharging {
-  color:      #90CAF9;
+  color:      #83a598;
 }
 
 #battery.charging {
-  color:      #66BB6A;
+  color:      #B8BB26;
 }
 
 #battery.warning {

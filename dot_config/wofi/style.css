@@ -1,19 +1,19 @@
 window {
   opacity: 0.9;
   margin: 5px;
-  background-color: #282C34;
+  background-color: #282828;
 }
 
 #input {
-  background-color: #212121;
-  border: 1px solid #61AFEF;
+  background-color: #3c3836;
+  border: 1px solid #458588;
   opacity: 0.7;
   margin: 10px;
   font-family: "undefined";
 }
 
 #outer-box {
-  border: 2px solid #61AFEF;
+  border: 2px solid #458588;
 }
 
 #inner-box {
@@ -31,6 +31,6 @@ window {
 }
 
 #entry:selected {
-  background-color: #61AFEF;
+  background-color: #458588;
 }
 

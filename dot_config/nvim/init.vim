@@ -39,7 +39,8 @@ Plug 'christoomey/vim-tmux-navigator' " integration with tmux
 " ========================================================================
 " Appereance
 " ========================================================================
-Plug 'joshdick/onedark.vim' " Theme
+" Plug 'joshdick/onedark.vim' " Theme
+Plug 'morhetz/gruvbox'      " Theme
 Plug 'airblade/vim-gitgutter' " Git diff
 " ========================================================================
 
@@ -90,10 +91,16 @@ set shortmess+=c
 " Apperance
 " ========================================================================
 syntax enable
-let g:onedark_termcolors = 256
-let g:onedark_terminal_italics = 1
-colorscheme onedark
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+
+" Onedark
+" let g:onedark_termcolors = 256
+" let g:onedark_terminal_italics = 1
+" colorscheme onedark
+" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+
+" Gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
+
 " ========================================================================
 
 
