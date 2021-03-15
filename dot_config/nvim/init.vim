@@ -40,6 +40,7 @@ Plug 'christoomey/vim-tmux-navigator' " integration with tmux
 " Appereance
 " ========================================================================
 " Plug 'joshdick/onedark.vim' " Theme
+Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'      " Theme
 Plug 'airblade/vim-gitgutter' " Git diff
 " ========================================================================
@@ -50,17 +51,10 @@ call plug#end()
 " ========================================================================
 " File navigation
 " ========================================================================
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 
-
 " Use ripgrep
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'rg --files'
 " Enable fuzzy finder
 nnoremap <silent> <C-f> :Files<CR>
 " ========================================================================
