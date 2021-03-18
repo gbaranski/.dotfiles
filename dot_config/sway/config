@@ -21,15 +21,14 @@ set $term alacritty
 set $menu wofi --show drun
 
 ### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg ~/images/wallpaper.png fill
-output eDP-1 pos 0 0
-output DP-1 pos 1920 0
-
-exec mako
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
 exec inactive-windows-transparency.py
 exec waybar
 exec libinput-gestures
+exec mako
 
 default_border none
 
@@ -48,6 +47,9 @@ input "type:keyboard" {
 
 }
 
+output eDP-1 pos 0 0
+output eDP-1 scale 1.3
+output DP-1 pos 1920 0
 
 for_window [app_id=".*"] opacity 0.9
 for_window [app_id=".*"] border none
