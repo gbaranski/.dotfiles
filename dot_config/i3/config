@@ -40,11 +40,10 @@ bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
 bindsym XF86Search            exec $menu
 
-bindsym --release Print exec scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
-bindsym --release $mod+Print exec scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
-
-bindsym --release Shift+Print exec scrot '~/screenshots/%F_%T_$wx$h.png'
-bindsym --release $mod+Shift+Print exec scrot -s '~/screenshots/%F_%T_$wx$h.png'
+bindsym --release Print               exec maim -s  | xclip -selection clipboard -t image/png
+bindsym --release Shift+Print         exec maim     | xclip -selection clipboard -t image/png
+bindsym --release Control+Print       exec maim     ~/screenshots/$(date +%s).png
+bindsym --release Control+Shift+Print exec maim -s  ~/screenshots/$(date +%s).png
 
 floating_modifier $mod
 
