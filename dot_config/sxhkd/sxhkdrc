@@ -120,6 +120,9 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+#
+# Special keys
+#
 
 XF86AudioRaiseVolume
   pamixer -ui 2
@@ -128,7 +131,7 @@ XF86AudioLowerVolume
   pamixer -ud 2
 
 XF86AudioMute
-  pamixer --togle-mute
+  pamixer --toggle-mute
 
 XF86AudioPlay
   playerctl play-pause
@@ -144,3 +147,15 @@ XF86MonBrightnessUp
 
 XF86MonBrightnessDown
   light -U 5
+
+Print
+  scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+
+super + Print
+  scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+
+ctrl + Print
+  scrot '~/screenshots/%F_%T_$wx$h.png'
+
+ctrl + super + Print
+  scrot -s '~/screenshots/%F_%T_$wx$h.png'
