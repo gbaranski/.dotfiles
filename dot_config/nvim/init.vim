@@ -42,7 +42,6 @@ Plug 'christoomey/vim-tmux-navigator' " integration with tmux
 " Plug 'joshdick/onedark.vim' " Theme
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'      " Theme
-Plug 'airblade/vim-gitgutter' " Git diff
 " ========================================================================
 
 call plug#end()
@@ -104,7 +103,7 @@ let g:gruvbox_hls_cursor = 'orange'
 let g:gruvbox_contrast_dark = 'medium'
 let g:gruvbox_contrast_light = 'medium'
 let g:gruvbox_number_column = 'bg0'
-let g:gruvbox_sign_column = 'bg1'
+let g:gruvbox_sign_column = 'bg0'
 let g:gruvbox_color_column = 'bg1'
 let g:gruvbox_vert_split = 'bg1'
 let g:gruvbox_italicize_comments = 1
