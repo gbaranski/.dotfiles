@@ -1,52 +1,48 @@
 general {
     output_format = "i3bar"
     colors = true
-    
+
+    color_good = "#b8bb26"
+    color_degraded = "#fe8019"
+    color_bad = "#fb4934"
 }
 
-order += "disk /"
-order += "wireless wlp3s0"
-order += "ethernet enp2s0"
-order += "battery 1"
-order += "cpu_temperature 0"
+order += "wireless wlan0"
+order += "battery 0"
 order += "cpu_usage"
+order += "cpu_temperature 0"
 order += "memory"
+order += "load"
 order += "volume master"
 order += "time"
 
 
-disk "/" {
-        format = "%free"
-}
-
-wireless wlp3s0 {
-        format_up = "W: (%quality at %essid, %bitrate / %frequency) %ip"
+wireless wlan0 {
+        format_up = "W: %essid - %ip"
         format_down = "W: down"
 }
-ethernet enp2s0 {
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
-}
-battery 1 {
+battery 0 {
         format = "%status %percentage %consumption"
         format_down = "No battery"
-        status_chr = "⚡ CHR"
-        status_bat = "🔋 BAT"
+        status_chr = " CHR"
+        status_bat = " BAT"
         status_unk = "? UNK"
-        status_full = "☻ FULL"
-        path = "/sys/class/power_supply/BAT1/uevent"
+        status_full = " FULL"
+        path = "/sys/class/power_supply/BAT0/uevent"
+        last_full_capacity = true
+        integer_battery_capacity = true
         low_threshold = 20
 }
 cpu_temperature 0 {
         format = "T: %degrees °C"
         max_threshold = 50
-        path = "/sys/class/thermal/thermal_zone0/temp"
+        path = "/sys/class/thermal/thermal_zone10/temp"
 }
 
 cpu_usage {
-  format = "CPU: %usage"
-  max_threshold = 75
-  degraded_threshold = 50
+        format = "CPU: %usage"
+        max_threshold = 75
+        degraded_threshold = 25
 }
 
 memory {
@@ -55,11 +51,16 @@ memory {
         threshold_critical = "10%"
 }
 
+load {
+  format = "load: %1min"
+}
+
+
 time {
   format = "%Y-%m-%d %H:%M:%S"
 }
 
 volume master {
-        format = "♪: %volume"
-        format_muted = "♪: muted (%volume)"
+        format = " %volume"
+        format_muted = "muted"
 }

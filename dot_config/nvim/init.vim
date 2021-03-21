@@ -92,8 +92,32 @@ syntax enable
 " colorscheme onedark
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
+set termguicolors
 " Gruvbox
+let g:gruvbox_bold = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_transparent_bg = 1
+let g:gruvbox_underline = 1
+let g:gruvbox_undercurl = 1
+let g:gruvbox_termcolors = 256
+let g:gruvbox_hls_cursor = 'orange'
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_light = 'medium'
+let g:gruvbox_number_column = 'bg0'
+let g:gruvbox_sign_column = 'bg1'
+let g:gruvbox_color_column = 'bg1'
+let g:gruvbox_vert_split = 'bg1'
+let g:gruvbox_italicize_comments = 1
+let g:gruvbox_italicize_strings = 1
+let g:gruvbox_invert_selection = 1
+let g:gruvbox_invert_signs = 0
+let g:gruvbox_invert_indent_guides = 1
+let g:gruvbox_invert_tabline = 1
+let g:gruvbox_improved_strings = 0
+let g:gruvbox_improved_warnings = 1
+let g:gruvbox_guisp_fallback = 'NONE'
 autocmd vimenter * ++nested colorscheme gruvbox
+
 
 " ========================================================================
 
@@ -133,18 +157,12 @@ set hidden
 set nobackup
 set nowritebackup
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 " ========================================================================
 
 
@@ -225,6 +243,11 @@ lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   on_attach = on_attach
 }
+lspconfig.hls.setup {
+  on_attach = on_attach,
+  filetypes = { "haskell", "lhaskell", "hs" }
+}
+
 function goimports(timeoutms)
   local context = { source = { organizeImports = true } }
   vim.validate { context = { context, "t", true } }

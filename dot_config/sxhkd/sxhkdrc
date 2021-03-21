@@ -140,7 +140,7 @@ XF86AudioNext
   playerctl next
 
 XF86AudioPrev
-  playerctl prev
+  playerctl previous
 
 XF86MonBrightnessUp
   light -A 5
