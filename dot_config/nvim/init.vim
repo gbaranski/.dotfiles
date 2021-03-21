@@ -144,6 +144,9 @@ vnoremap <Right> <Nop>
 cnoremap <Right> <Nop>
 inoremap <Right> <Nop>
 
+
+" Fix sign column
+set signcolumn=yes:1
 set clipboard+=unnamedplus " Use system clipboard
 set number relativenumber
 set nu rnu
