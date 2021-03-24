@@ -1,0 +1,7 @@
+setxkbmap -option ctrl:nocaps pl
+xrdb -merge ~/.Xresources
+feh --bg-scale ~/images/wallpaper.jpg
+picom &
+dwmstatus &
+
+exec dwm

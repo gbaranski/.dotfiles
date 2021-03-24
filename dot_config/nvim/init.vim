@@ -245,6 +245,9 @@ lspconfig.gopls.setup {
   cmd = {"gopls", "serve"},
   on_attach = on_attach
 }
+lspconfig.pyls.setup {
+  on_attach = on_attach
+}
 lspconfig.hls.setup {
   on_attach = on_attach,
   filetypes = { "haskell", "lhaskell", "hs" }

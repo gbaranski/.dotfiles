@@ -19,7 +19,8 @@ set $right l
 set $term alacritty
 set $menu "rofi -modi drun,run -show drun"
 
-exec_always feh --bg-scale ~/images/wallpaper.png
+exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.png
+# exec --no-startup-id picom -b
 
 for_window [class="^.*"] border pixel 0
 gaps inner 10

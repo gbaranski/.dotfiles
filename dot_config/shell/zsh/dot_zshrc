@@ -1,67 +1,24 @@
-# ========================================================================
-# ALIASES
-# ========================================================================
-alias ls="lsd" # LS alternative, sudo pacman -S lsd
-alias python="python3" # Fix python fucking piece of shit
-alias g='git'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit -v'
-alias gd='git diff'
-alias gp='git push'
-alias gst='git status'
-# ========================================================================
+#!/bin/zsh
 
+source $HOME/.config/shell/aliasrc
 
 # ========================================================================
-# FIX LOCALE
+# KEYBINDINGS
 # ========================================================================
-export LC_CTYPE="en_US.UTF8"
-export LANG="en_US.UTF-8"
-export LC_COLLATE="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
+bindkey -s '^o' 'nnn\n'     # File manager
+bindkey -s '^a' 'python3\n' # For simple calculations
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
+
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
 # ========================================================================
 
 # ========================================================================
-# EXPORTS
+# APPEARANCE
 # ========================================================================
-export EDITOR=nvim
-export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_DEFAULT_OPTS='-m --height 50% --border'
-
-
-# Add HOME/bin to PATH
-export PATH=$PATH:$HOME/bin
-
-# Only for my computer for ESP8266 Development
-{{ if eq .chezmoi.hostname "xps" }}
-export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
-alias get_lx106='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin"'
-{{ end }}
+autoload -U colors && colors	# Load colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 # ========================================================================
-
-{{ if eq .chezmoi.os "linux" }}
-# ========================================================================
-# LINUX SPECIFIC
-# ========================================================================
-export GTK_THEME=Adwaita:dark # Set GTK Theme
-# ========================================================================
-# WAYLAND SPECIFIC
-# ========================================================================
-{{ if .wayland }}
-export MOZ_ENABLE_WAYLAND=1                  # Wayland native support in Firefox
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1 # Remove decorations
-export XDG_CURRENT_DESKTOP=sway
-export GDK_BACKEND=wayland                          # Force GTK to use wayland
-export CLUTTER_BACKEND=wayland
-{{ end }}
-# ========================================================================
-{{ end }}
 
 
 # ========================================================================
@@ -102,9 +59,8 @@ set -o vi           # Enable VI Mode
 export KEYTIMEOUT=1 # Reduce latency when pressing <Esc>
 # ========================================================================
 
-
 # ========================================================================
-# AUTO COMPLETION
+# Completions
 # ========================================================================
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
@@ -131,24 +87,10 @@ else
 fi
 unset _comp_path
 
-#
-# Styles
-#
-
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache"
-
-# Case-insensitive (all), partial-word, and then substring completion.
-if zstyle -t ':prezto:module:completion:*' case-sensitive; then
-  zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-  setopt CASE_GLOB
-else
-  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-  unsetopt CASE_GLOB
-fi
-
 
 # Group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select
@@ -169,13 +111,14 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
+
 # Increase the number of errors based on the length of the typed word. But make
 # sure to cap (at 7) the max-errors to avoid hanging.
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
+
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-
 
 # Array completion element sorting.
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -256,31 +199,3 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 
 # ========================================================================
 
-
-# ========================================================================
-# ZINIT
-# ========================================================================
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-# ========================================================================
-
-
-# ========================================================================
-# PACKAGES
-# ========================================================================
-PS1="READY >" # provide a simple prompt till the theme loads
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
-
-
-zinit light zdharma/fast-syntax-highlighting
-# ========================================================================

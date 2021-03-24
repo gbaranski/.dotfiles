@@ -53,13 +53,13 @@ jq
 notify-send
 ```
 
-![sway-screenshot](sway.png)
+![sway-screenshot](docs/sway.png)
 
 #### Wofi
 
 App launcher for [Sway](#sway)
 
-![wofi](wofi.png)
+![wofi](docs/wofi.png)
 
 
 ## i3
@@ -86,7 +86,7 @@ Terminal multiplexer, I use it when no tilling window manager available, or when
 tpm # Install with `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 ```
 
-![tmux-screenshot](tmux.png)
+![tmux-screenshot](docs/tmux.png)
 
 
 # Editor
@@ -103,13 +103,13 @@ fzf     # fuzzy finder
 ripgrep # better dir search 
 ```
 
-![neovim-screenshot](neovim.png)
+![neovim-screenshot](docs/neovim.png)
 
 ## Vim
 
 Used as fallback when Neovim 0.5.0 not available
 
-![vim-screenshot](vim.png)
+![vim-screenshot](docs/vim.png)
 
 # Shell
 
@@ -124,7 +124,7 @@ lsd   # ls alternative
 zinit # package manager(should be installed automatically)
 ```
 
-![zsh-screenshot](zsh.png)
+![zsh-screenshot](docs/zsh.png)
 
 # Terminal emulator
 
@@ -132,10 +132,10 @@ zinit # package manager(should be installed automatically)
 
 Simple terminal emulator
 
-![alacritty-screenshot](alacritty.png)
+![alacritty-screenshot](docs/alacritty.png)
 
 # Misc
 
 Provide `git sla` alias for nice git commit history
 
-![git-sla-screenshot](gitsla.png)
+![git-sla-screenshot](docs/gitsla.png)
