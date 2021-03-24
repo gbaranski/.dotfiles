@@ -18,8 +18,9 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show drun
-
+set $menu j4-dmenu-desktop \
+  --dmenu='bemenu -H 30 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282828" --tf "#ebdbb2" --fb "#282828" --ff "#83a598" --nb "#282828" --nf "#a89984" --hb "#504945" --hf "#ebdbb2"' \
+  --term='alacritty'
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
