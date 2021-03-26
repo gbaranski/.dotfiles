@@ -16,13 +16,27 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
-set $menu "rofi -modi drun,run -show drun"
+set $white #FFFFFF
+set $bg #282828
+set $bg_alt #504945
+set $fg #ebdbb2
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #488588
+set $purple #b16286
+set $aqua #689d6a
+set $gray #a89984
 
-exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.png
+set $term alacritty
+set $menu j4-dmenu-desktop \
+  --dmenu='dmenu' \
+  --term='alacritty'
+exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.jpg
 # exec --no-startup-id picom -b
 
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 5
+hide_edge_borders smart
 gaps inner 10
 smart_gaps on
 
@@ -165,24 +179,24 @@ bar {
     font pango:Jetbrains Mono 10
 
     colors {
-        background #282828B2
-        statusline #ebdbb2
-
-        focused_workspace  #ebdbb2 #458588
-        active_workspace   #ebdbb2 #504945
-        inactive_workspace #7c6f64 #1d2021
-        urgent_workspace   #ebdbb2 #cc241d
+        background $bg
+        statusline $fg
+        #                  text   background
+        focused_workspace  $fg    $aqua
+        active_workspace   $fg    $bg_alt
+        inactive_workspace $fg    $bg
+        urgent_workspace   $fg    $red
     }
 }
 
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #44475A #44475A #F8F8F2 #44475A   #44475A
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          $white  $white  $white  $white    $aqua
+client.focused_inactive $white  $white  $white  $white    $bg
+client.unfocused        $white  $white  $white  $white    $bg
+client.urgent           $white  $white  $white  $white    $white
+client.placeholder      $white  $white  $white  $white    $white
 
 client.background       #F8F8F2
 

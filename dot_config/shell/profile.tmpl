@@ -2,7 +2,6 @@
 export PATH=$PATH:$HOME/.local/bin
 
 export EDITOR="nvim"
-export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 
@@ -28,9 +27,10 @@ export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
 
 export GTK_THEME=Adwaita:dark
 
-
+{{ if .wayland }}
 export MOZ_ENABLE_WAYLAND=1
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export XDG_CURRENT_DESKTOP=sway
 export GDK_BACKEND=wayland
 export CLUTTER_BACKEND=wayland
+{{ end }}
