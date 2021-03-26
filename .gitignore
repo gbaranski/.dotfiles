@@ -1,0 +1,8 @@
+st/st
+st/*.o
+
+dwm/dwm
+dwm/*.o
+
+dwmstatus/dwmstatus
+dwmstatus/*.o
