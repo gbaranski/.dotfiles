@@ -30,13 +30,16 @@ set $gray #a89984
 
 set $term alacritty
 set $menu j4-dmenu-desktop \
-  --dmenu='dmenu' \
+  --dmenu='dmenu -i' \
   --term='alacritty'
-exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.jpg
-# exec --no-startup-id picom -b
 
-for_window [class="^.*"] border pixel 5
-hide_edge_borders smart
+exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.jpg
+exec --no-startup-id picom --experimental-backends
+exec --no-startup-id libinput-gestures
+
+# for_window [class="^.*"] border pixel 5
+# hide_edge_borders smart
+for_window [class="^.*"] border pixel 0
 gaps inner 10
 smart_gaps on
 
@@ -53,7 +56,7 @@ bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86AudioPlay         exec playerctl play-pause
 bindsym XF86AudioNext         exec playerctl next
 bindsym XF86AudioPrev         exec playerctl previous
-bindsym XF86Search            exec $menu
+bindsym XF86Search            exec --no-startup-id $menu
 
 bindsym --release Print               exec maim -s  | xclip -selection clipboard -t image/png
 bindsym --release Shift+Print         exec maim     | xclip -selection clipboard -t image/png
@@ -66,11 +69,11 @@ floating_modifier $mod
 # Key bindings
 #
 # start a terminal
-bindsym $mod+Return exec $term 
+bindsym $mod+Return exec --no-startup-id $term 
 # kill focused window
 bindsym $mod+Shift+q kill window
 # run menu 
-bindcode $mod+40 exec $menu
+bindcode $mod+40 exec --no-startup-id $menu
 # open scratchpad
 bindsym $mod+Shift+minus move scratchpad
 # reload the configuration file
@@ -158,10 +161,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym $left resize shrink width 10 px or 10 ppt
-        bindsym $down resize grow height 10 px or 10 ppt
-        bindsym $up resize shrink height 10 px or 10 ppt
-        bindsym $right resize grow width 10 px or 10 ppt
+        bindsym $left resize shrink width 1 px or 1 ppt
+        bindsym $down resize grow height 1 px or 1 ppt
+        bindsym $up resize shrink height 1 px or 1 ppt
+        bindsym $right resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"

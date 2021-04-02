@@ -59,5 +59,11 @@ colors:
 font:
   normal:
     family: Jetbrains Mono
+  size: 10
 
-# background_opacity: 0.9
+shell:
+  program: /usr/bin/tmux
+
+key_bindings:
+  - { key: V, mods: Alt, action: Paste }
+  - { key: C, mods: Alt, action: Copy }

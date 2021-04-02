@@ -21,15 +21,22 @@ set $term alacritty
 set $menu j4-dmenu-desktop \
   --dmenu='bemenu -H 30 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282828" --tf "#ebdbb2" --fb "#282828" --ff "#83a598" --nb "#282828" --nf "#a89984" --hb "#504945" --hf "#ebdbb2"' \
   --term='alacritty'
-### Output configuration
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+# Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg ~/images/wallpaper.jpg fill
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-exec inactive-windows-transparency.py
 exec waybar
 exec libinput-gestures
 exec mako
+exec ydotoold
+exec inactive-windows-transparency.py
 
 default_border none
 
