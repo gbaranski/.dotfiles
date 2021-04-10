@@ -1,4 +1,6 @@
 
+vim.api.nvim_set_keymap("n", "<space>f", "<cmd>Neoformat<CR>", { noremap=true, silent=true } ) -- Formatting using neoformat
+
 local lspconfig = require 'lspconfig'
 local treesitter = require 'nvim-treesitter.configs'
 local compe = require 'compe'
@@ -70,7 +72,7 @@ compe.setup {
 
   source = {
     path = true;
-    buffer = true;
+    buffer = false;
     calc = true;
     nvim_lsp = true;
     nvim_lua = true;
@@ -102,19 +104,18 @@ local on_attach = function(client, buffer)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
+  -- -- Set some keybinds conditional on server capabilities
+  -- if client.resolved_capabilities.document_formatting then
+  --   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  -- elseif client.resolved_capabilities.document_range_formatting then
+  --   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  -- end
 end
 
-local servers = { "rust_analyzer", "gopls" }
+local servers = { "rust_analyzer", "gopls", "tsserver" }
 
 for _, lsp_name in ipairs(servers) do
   lspconfig[lsp_name].setup {
     on_attach = on_attach,
   }
 end
-

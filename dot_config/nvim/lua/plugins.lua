@@ -44,5 +44,6 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'           -- Neovim official LSP
   use 'hrsh7th/nvim-compe'              -- Neovim auto completion
   use 'nvim-treesitter/nvim-treesitter' -- Nice syntax highlighting
+  use 'sbdchd/neoformat'                -- Formatting
 
 end)
