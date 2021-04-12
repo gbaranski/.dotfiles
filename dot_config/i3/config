@@ -17,24 +17,25 @@ set $up k
 set $right l
 
 set $white #FFFFFF
-set $bg #282828
+set $bg #282C34
 set $bg_alt #504945
-set $fg #ebdbb2
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #488588
-set $purple #b16286
-set $aqua #689d6a
-set $gray #a89984
+set $fg #ABB2BF
+set $red #E06C75
+set $green #98C379
+set $yellow #E5C07B
+set $blue #61AFEF
+set $purple #C678DD
+set $aqua #56B6C2
+set $gray #ABB2BF
 
 set $term alacritty
 set $menu j4-dmenu-desktop \
   --dmenu='dmenu -i' \
   --term='alacritty'
 
-exec_always --no-startup-id feh --bg-scale ~/images/wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale ~/background.jpg
 exec --no-startup-id picom --experimental-backends
+exec --no-startup-id dunst
 exec --no-startup-id libinput-gestures
 
 # for_window [class="^.*"] border pixel 5
@@ -48,14 +49,14 @@ font pango:Jetbrains Mono 8
 #
 # Special keys
 #
-bindsym XF86AudioRaiseVolume  exec pamixer -ui 2
-bindsym XF86AudioLowerVolume  exec pamixer -ud 2
-bindsym XF86AudioMute         exec pamixer --toggle-mute
-bindsym XF86MonBrightnessUp   exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
-bindsym XF86AudioPlay         exec playerctl play-pause
-bindsym XF86AudioNext         exec playerctl next
-bindsym XF86AudioPrev         exec playerctl previous
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -ui 2
+bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -ud 2
+bindsym XF86AudioMute         exec --no-startup-id pamixer --toggle-mute
+bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext         exec --no-startup-id playerctl next
+bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
 bindsym XF86Search            exec --no-startup-id $menu
 
 bindsym --release Print               exec maim -s  | xclip -selection clipboard -t image/png
@@ -185,7 +186,7 @@ bar {
         background $bg
         statusline $fg
         #                  text   background
-        focused_workspace  $fg    $aqua
+        focused_workspace  $white $aqua
         active_workspace   $fg    $bg_alt
         inactive_workspace $fg    $bg
         urgent_workspace   $fg    $red
