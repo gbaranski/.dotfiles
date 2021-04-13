@@ -1,3 +1,0 @@
-#!/bin/sh
-
-maim -s ~/screenshots/$(date +%s).png
