@@ -16,6 +16,7 @@ require('lsp')
 require('lsp.js-ts')
 require('lsp.go')
 require('lsp.rust')
+require('lsp.haskell')
 
 require('completions')
 require('treesitter')

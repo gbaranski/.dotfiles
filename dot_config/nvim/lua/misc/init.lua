@@ -1,3 +1,4 @@
+vim.cmd('set encoding=UTF-8')          -- Set encoding
 vim.cmd("set signcolumn=yes:1")        -- Enable sign column
 vim.cmd("set number relativenumber")   -- Hybrid lines
 

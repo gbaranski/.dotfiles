@@ -31,7 +31,9 @@ return require('packer').startup(function()
       vim.cmd[[ highlight GitSignsAdd    guifg=#98C379 ]]
       vim.cmd[[ highlight GitSignsChange guifg=#E5C07B ]]
       vim.cmd[[ highlight GitSignsDelete guifg=#E06C75 ]]
-      require('gitsigns').setup()
+      require('gitsigns').setup{
+        _refresh_staged_on_update = false
+      }
     end
   }
 
@@ -45,5 +47,7 @@ return require('packer').startup(function()
   use 'hrsh7th/nvim-compe'              -- Neovim auto completion
   use 'nvim-treesitter/nvim-treesitter' -- Nice syntax highlighting
   use 'sbdchd/neoformat'                -- Formatting
+
+  use 'metakirby5/codi.vim' -- Python scratchpad
 
 end)
