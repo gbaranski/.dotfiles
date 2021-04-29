@@ -17,7 +17,7 @@ opt.showmode       = false
 opt.showcmd        = true
 opt.cmdheight      = 1     -- Height of the command bar
 opt.incsearch      = true  -- Makes search act like search in modern browsers
-opt.showmatch      = true  -- show matching brackets when text indicator is over them
+opt.showmatch      = false -- show matching brackets when text indicator is over them
 opt.relativenumber = true  -- Show line numbers
 opt.number         = true  -- But show the actual number for the line we're on
 opt.ignorecase     = true  -- Ignore case when searching...
@@ -54,8 +54,6 @@ opt.clipboard      = 'unnamedplus'
 opt.inccommand     = 'split'
 opt.swapfile       = false -- Living on the edge
 opt.shada          = { "!", "'1000", "<50", "s10", "h" }
-
-opt.mouse          = 'n'
 
 -- Helpful related items:
 --   1. :center, :left, :right

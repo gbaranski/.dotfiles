@@ -119,9 +119,12 @@
   ];
 
   programs.light.enable = true;
-  services.tlp.enable = true;
   services.acpid.enable = true;
-  services.dbus.enable = true;
+  services.dbus = {
+    enable = true;
+    packages = with pkgs; [ gnome3.dconf ];
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

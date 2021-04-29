@@ -5,7 +5,7 @@
     clock24 = true;
     escapeTime = 0;
     keyMode = "vi";
-    terminal = "screen-256color";
+    terminal = "xterm-256color";
     baseIndex = 1;
     shortcut = "a";
     customPaneNavigationAndResize = true;
@@ -13,6 +13,7 @@
       ''
       set -g mouse on
       set -g default-shell ~/.nix-profile/bin/fish
+      set -ga terminal-overrides ",*col*:Tc"
       # Create Panes: window splitting
       # Split vertically
       unbind %

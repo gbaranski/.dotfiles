@@ -3,6 +3,8 @@ vim.api.nvim_set_keymap('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap
 vim.api.nvim_set_keymap('n', '<leader>fb', ':Telescope buffers<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', '<space><space>', '<C-^>', { noremap = true, silent = true })
+
 vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_icons = {
   default = "",

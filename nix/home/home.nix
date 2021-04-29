@@ -35,6 +35,8 @@
     python39         # Fucking shit
     ripgrep          # Better grep
     fd               # Better find
+    bitwarden        # Password manager
+    bitwarden-cli    # Password manager in CLI
 
     # Bat is better cat, also it provides few extras
     bat              
@@ -61,12 +63,13 @@
     # ./programs/autorandr.nix
     # ./programs/picom.nix
     # ./programs/dunst.nix
-    # ./programs/chromium.nix
+    ./programs/chromium.nix
 
     ./programs/wayland/sway.nix
     ./programs/wayland/waybar.nix
 
     ./programs/neovim/default.nix
+    ./programs/kakoune
     ./programs/alacritty.nix
     ./programs/fish.nix
     ./programs/git.nix

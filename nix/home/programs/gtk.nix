@@ -6,13 +6,13 @@
       package = pkgs.gnome3.gnome_themes_standard;
       name = "Adwaita:dark";
     };
+    /* font = { */
+    /*   name = "DejaVu Sans"; */
+    /*   package = pkgs.dejavu_fonts; */
+    /* }; */
     iconTheme = {
       package = pkgs.font-awesome;
       name = "Font Awesome 5 Free";
-    };
-    font = {
-      name = "Fira Code";
-      package = pkgs.fira-code;
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
