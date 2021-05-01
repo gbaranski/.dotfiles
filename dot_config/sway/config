@@ -13,97 +13,42 @@ set $left h
 set $down j
 set $up k
 set $right l
+
+exec_always pkill kanshi; exec kanshi
+exec mako
+exec ydotoold
+exec libinput-gestures
+
 # Your preferred terminal emulator
 set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
 set $menu j4-dmenu-desktop \
-  --dmenu='bemenu -H 30 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282828" --tf "#ebdbb2" --fb "#282828" --ff "#83a598" --nb "#282828" --nf "#a89984" --hb "#504945" --hf "#ebdbb2"' \
-  --term='alacritty'
+          --term=Alacritty \
+          --dmenu='BEMENU_BACKEND=wayland bemenu -H 26 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282C34" --tf "#ABB2BF" --fb "#282C34" --ff "#61AFEF" --nb "#282C34" --nf "#61AFEF" --hb "#61AFEF" --hf "#282C34"' 
+
+
+font pango:Jetbrains Mono
+
+default_border pixel 2
+gaps inner 10
+smart_gaps on
+smart_borders on
+
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
+output * bg ~/.wallpaper.jpg fill
+
+### Idle configuration
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
 
 exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000'
 
-# Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/images/wallpaper.jpg fill
-exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-exec waybar
-exec libinput-gestures
-exec mako
-exec ydotoold
-exec inactive-windows-transparency.py
-
-default_border none
-
-input "1739:30383:CUST0001:00_06CB:76AF_Touchpad" {
-    tap enabled
-    drag disabled
-}
-
-input "5426:22:Razer_Razer_DeathAdder" {
-    pointer_accel -1
-}
-
-input "type:keyboard" {
-    xkb_layout pl
-    xkb_options ctrl:nocaps
-
-}
-
-output eDP-1 pos 0 0
-output eDP-1 scale 1.3
-output DP-1 pos 1920 0
-
-for_window [app_id=".*"] border none
-gaps inner 5
-smart_gaps on
-
-bindsym XF86AudioRaiseVolume  exec pamixer -ui 2 && pamixer --get-volume > $SWAYSOCK.wob
-bindsym XF86AudioLowerVolume  exec pamixer -ud 2 && pamixer --get-volume > $SWAYSOCK.wob
-bindsym XF86AudioMute         exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
-bindsym XF86MonBrightnessUp   exec light -A 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
-bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $SWAYSOCK.wob
-bindsym XF86AudioPlay         exec playerctl play-pause
-bindsym XF86AudioNext         exec playerctl next
-bindsym XF86AudioPrev         exec playerctl previous
-bindsym XF86Search            exec $menu
-
-bindsym --release Print exec /usr/share/sway/scripts/grimshot copy screen
-bindsym --release Shift+Print exec /usr/share/sway/scripts/grimshot copy area
-
-bindsym --release Control+Print exec /usr/share/sway/scripts/grimshot save screen ~/screenshots/$(date +%F_%H-%M-%S).png
-bindsym --release Control+Shift+Print exec /usr/share/sway/scripts/grimshot save area ~/screenshots/$(date +%F_%H-%M-%S).png
-
-
-font pango:Jetbrains Mono 8
-
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
 # Example configuration:
 #
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
@@ -115,6 +60,20 @@ font pango:Jetbrains Mono 8
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+input "type:touchpad" {
+  tap enabled
+  drag disabled
+}
+
+input "5426:22:Razer_Razer_DeathAdder" {
+    pointer_accel -1
+}
+
+input "type:keyboard" {
+  xkb_layout pl
+  xkb_options ctrl:nocaps
+}
 
 ### Key bindings
 #
@@ -141,6 +100,22 @@ font pango:Jetbrains Mono 8
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+#
+# Media buttons
+#
+    bindsym XF86AudioRaiseVolume  exec pamixer -ui 2
+    bindsym XF86AudioLowerVolume  exec pamixer -ud 2
+    bindsym XF86AudioMute         exec pamixer --toggle-mute
+    bindsym XF86MonBrightnessUp   exec light -A 5
+    bindsym XF86MonBrightnessDown exec light -U 5
+    bindsym XF86AudioPlay         exec playerctl play-pause
+    bindsym XF86AudioNext         exec playerctl next
+    bindsym XF86AudioPrev         exec playerctl previous
+    bindsym XF86Search            exec $menu
+    bindsym --release Print exec /usr/share/sway/scripts/grimshot copy area
+    bindsym --release Shift+Print exec /usr/share/sway/scripts/grimshot save area ~/screenshots/$(date +%F_%H-%M-%S).png
+
 #
 # Moving around:
 #
@@ -254,22 +229,25 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+client.focused   #61AFEFCC #61AFEFCC #282C34
+client.unfocused #282C34CC #282C34CC #ABB2BF
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-# bar {
-#     position top
+bar {
+    position top
 
-#     # When the status_command prints a new line to stdout, swaybar updates.
-#     # The default just shows the current date and time.
-#     status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    font pango:FiraCode Nerd Font, Font Awesome 5 Free 12
+    status_command i3status-rs
+    height 26
 
-#     colors {
-#         statusline #ffffff
-#         background #323232
-#         inactive_workspace #32323200 #32323200 #5c5c5c
-#     }
-# }
+    colors {
+        background         #282C34CC
+        statusline         #FFFFFF
+        separator          #282C34
+    }
+}
 
-include /etc/sway/config.d/*
+include @sysconfdir@/sway/config.d/*
