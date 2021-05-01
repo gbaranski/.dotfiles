@@ -3,51 +3,113 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
-
 return require('packer').startup(function()
-  -- Packer can manage itself use 'wbthomason/packer.nvim'
+  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Navigation
-  use 'preservim/nerdtree' -- File manager
-  use 'junegunn/fzf'       -- Fuzzy finder, that requires `fzf` and `bat` installed
-  use 'junegunn/fzf.vim'   -- Also fuzzy finder, no idea why two packages
-  use {                    -- Bufferline
-    'romgrk/barbar.nvim', 
-    requires = 'kyazdani42/nvim-web-devicons'
-  } 
-
-  -- Appearance
-  use 'joshdick/onedark.vim'         -- Theme
-  use 'itchyny/lightline.vim'        -- Light statusline
-
-  use {                              -- Git signs
-    'lewis6991/gitsigns.nvim', 
-    requires = {
-      'nvim-lua/plenary.nvim'
-    },
+  -- Auto pairs
+  use 'windwp/nvim-autopairs'
+  use 'tpope/vim-surround'
+  -- gcc to comment line
+  use {
+    'terrortylor/nvim-comment',
+    config = [[ require('nvim_comment').setup() ]],
+  }
+  use {
+    'phaazon/hop.nvim',
+    as = 'hop',
     config = function()
-      -- Setup highlights before calling setup()
-      vim.cmd[[ highlight GitSignsAdd    guifg=#98C379 ]]
-      vim.cmd[[ highlight GitSignsChange guifg=#E5C07B ]]
-      vim.cmd[[ highlight GitSignsDelete guifg=#E06C75 ]]
-      require('gitsigns').setup{
-        _refresh_staged_on_update = false
-      }
+      require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
+      nnoremap('f', '<cmd>lua require("hop").hint_words()<CR>')
     end
   }
 
-  use 'tpope/vim-commentary'            -- Comments using `gcc` command
-  use 'tpope/vim-surround'              -- Parenthees, brackets, XML tags and etc
-  use 'jiangmiao/auto-pairs'            -- Automatic pairs
+  use {
+    'npxbr/glow.nvim',
+    config = function()
+      nnoremap('<leader>p', '<cmd>Glow<CR>')
+    end
+  }
 
-  use 'christoomey/vim-tmux-navigator'  -- Tmux C-hjkl navigation
+  -- Requries https://github.com/jabirali/tmux-tilish installed
+  use {
+    'numToStr/Navigator.nvim',
+    config = function()
+      require('Navigator').setup()
+      nnoremap('<A-h>', '<cmd>lua require("Navigator").left()<CR>')
+      nnoremap('<A-j>', '<cmd>lua require("Navigator").down()<CR>')
+      nnoremap('<A-k>', '<cmd>lua require("Navigator").up()<CR>')
+      nnoremap('<A-l>', '<cmd>lua require("Navigator").right()<CR>')
+      -- nnoremap('<A-p>', '<cmd>lua require("Navigator").previous()<CR>')
 
-  use 'neovim/nvim-lspconfig'           -- Neovim official LSP
-  use 'hrsh7th/nvim-compe'              -- Neovim auto completion
-  use 'nvim-treesitter/nvim-treesitter' -- Nice syntax highlighting
-  use 'sbdchd/neoformat'                -- Formatting
+    end
+  }
 
-  use 'metakirby5/codi.vim' -- Python scratchpad
 
+  -- Appearance
+  use {
+    'sainnhe/sonokai',
+    config = function()
+      require('colorscheme')
+    end,
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim', 
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+
+  -- Project/Files navigation
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      'nvim-lua/popup.nvim', 
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('telescope')
+    end
+  }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() 
+      require('nvimtree')
+    end
+  }
+  -- use {
+  --   'akinsho/nvim-bufferline.lua',
+  --   requires = 'kyazdani42/nvim-web-devicons',
+  --   config = function()
+  --     require('tabs')
+  --   end
+  -- }
+
+
+  -- Syntax highlighting
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('treesitter')
+    end
+
+  }
+
+  -- LSP
+  use {
+    'neovim/nvim-lspconfig',
+    requires = { 
+      'nvim-lua/completion-nvim', 
+      'nvim-lua/lsp_extensions.nvim', 
+      'norcalli/snippets.nvim', 
+      'glepnir/lspsaga.nvim', 
+      -- 'nvim-lua/lsp-status.nvim',  TODO: Integrate it soon
+    },
+    config = function() 
+      require('lsp')
+    end
+  }
 end)

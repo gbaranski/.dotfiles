@@ -1,22 +1,8 @@
-require('plugins')
+--Remap space as leader key
+vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent=true})
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-require('colorscheme')
-require('statusline')
-
-require('keybindings.completions')
--- require('keybindings.disable-arrows')
-require('keybindings.lsp')
-require('keybindings.misc')
-require('keybindings.navigation')
-
-require('misc')
-require('misc.indent')
-
-require('lsp')
-require('lsp.js-ts')
-require('lsp.go')
-require('lsp.rust')
-require('lsp.haskell')
-
-require('completions')
-require('treesitter')
+require('globals')
+require("plugins")
+require("misc")
