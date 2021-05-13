@@ -1,7 +1,10 @@
 local opt = vim.opt
 local nvim_lsp = require('lspconfig')
+local lsp_status = require('lsp-status')
 local completion = require('completion')
 local saga = require('lspsaga')
+
+lsp_status.register_progress()
 
 opt.completeopt = 'menuone,noinsert,noselect'
 vim.cmd([[ set shortmess+=c ]])
@@ -14,7 +17,12 @@ vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { 
 
 local on_attach = function(client, bufnr)
   completion.on_attach()
-  saga.init_lsp_saga()
+  saga.init_lsp_saga {
+    code_action_prompt = {
+      enable = false,
+    }
+
+  }
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -25,17 +33,17 @@ local on_attach = function(client, bufnr)
   buf_nnoremap('gD'        , '<Cmd>lua vim.lsp.buf.declaration()<CR>')
   buf_nnoremap('gd'        , '<Cmd>lua vim.lsp.buf.definition()<CR>')
   buf_nnoremap('gh'        , '<Cmd>lua require("lspsaga.provider").lsp_finder()<CR>')
+  buf_nnoremap('gt'        , '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+  buf_nnoremap('gr'        , '<cmd>lua vim.lsp.buf.references()<CR>')
   buf_nnoremap('K'         , '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>')
   buf_nnoremap('gi'        , '<cmd>lua vim.lsp.buf.implementation()<CR>')
   buf_nnoremap('<C-k>'     , '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   buf_nnoremap('<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
   buf_nnoremap('<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
   buf_nnoremap('<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-  buf_nnoremap('<leader>D' , '<cmd>lua vim.lsp.buf.type_definition()<CR>')
   buf_nnoremap('<leader>rn', '<cmd>lua require("lspsaga.rename").rename()<CR>')
   buf_nnoremap('<leader>ca', '<cmd>lua require("lspsaga.codeaction").code_action()<CR>')
   buf_vnoremap('<leader>ca', ':<C-u>lua require("lspsaga.codeaction").range_code_action()<CR>')
-  buf_nnoremap('gr'        , '<cmd>lua vim.lsp.buf.references()<CR>')
   buf_nnoremap('<leader>e' , '<cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>')
   buf_nnoremap('[e'        , '<cmd>lua require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()<CR>')
   buf_nnoremap(']e'        , '<cmd>lua require("lspsaga.diagnostic").lsp_jump_diagnostic_next()<CR>')
@@ -60,11 +68,14 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Use a loop to conveniently both setup defined servers 
--- and map buffer local keybindings when the language server attaches
-local servers = { "rust_analyzer" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { 
-	  on_attach = on_attach,
+nvim_lsp.ccls.setup {
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern("platformio.ini") or dirname,
+  init_options = {
+    compilationDatabaseDirectory = ".pio",
   }
-end
+}
+
+nvim_lsp.rust_analyzer.setup {
+  on_attach = on_attach,
+}

@@ -8,7 +8,7 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Auto pairs
-  use 'windwp/nvim-autopairs'
+  -- use 'windwp/nvim-autopairs'
   use 'tpope/vim-surround'
   -- gcc to comment line
   use {
@@ -20,15 +20,13 @@ return require('packer').startup(function()
     as = 'hop',
     config = function()
       require('hop').setup { keys = 'etovxqpdygfblzhckisuran' }
-      nnoremap('f', '<cmd>lua require("hop").hint_words()<CR>')
+      nnoremap('t', '<cmd>lua require("hop").hint_words()<CR>')
     end
   }
 
   use {
     'npxbr/glow.nvim',
-    config = function()
-      nnoremap('<leader>p', '<cmd>Glow<CR>')
-    end
+    config = function() nnoremap('<leader>p', '<cmd>Glow<CR>') end
   }
 
   -- Requries https://github.com/jabirali/tmux-tilish installed
@@ -41,7 +39,6 @@ return require('packer').startup(function()
       nnoremap('<A-k>', '<cmd>lua require("Navigator").up()<CR>')
       nnoremap('<A-l>', '<cmd>lua require("Navigator").right()<CR>')
       -- nnoremap('<A-p>', '<cmd>lua require("Navigator").previous()<CR>')
-
     end
   }
 
@@ -49,17 +46,7 @@ return require('packer').startup(function()
   -- Appearance
   use {
     'sainnhe/sonokai',
-    config = function()
-      require('colorscheme')
-    end,
-  }
-
-  use {
-    'lewis6991/gitsigns.nvim', 
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('gitsigns').setup()
-    end
+    config = function() require('colorscheme') end,
   }
 
   -- Project/Files navigation
@@ -69,16 +56,12 @@ return require('packer').startup(function()
       'nvim-lua/popup.nvim', 
       'nvim-lua/plenary.nvim'
     },
-    config = function()
-      require('telescope')
-    end
+    config = function() require('telescope') end
   }
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() 
-      require('nvimtree')
-    end
+    config = function() require('nvimtree') end
   }
   -- use {
   --   'akinsho/nvim-bufferline.lua',
@@ -92,9 +75,15 @@ return require('packer').startup(function()
   -- Syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('treesitter')
-    end
+    config = function() require('treesitter') end
+
+  }
+
+  use {
+    'glepnir/galaxyline.nvim',
+    branch = 'main',
+    config = function() require'statusline' end,
+    requires = { 'kyazdani42/nvim-web-devicons', 'nvim-lua/lsp-status.nvim' }
 
   }
 
@@ -106,10 +95,8 @@ return require('packer').startup(function()
       'nvim-lua/lsp_extensions.nvim', 
       'norcalli/snippets.nvim', 
       'glepnir/lspsaga.nvim', 
-      -- 'nvim-lua/lsp-status.nvim',  TODO: Integrate it soon
+      'nvim-lua/lsp-status.nvim' 
     },
-    config = function() 
-      require('lsp')
-    end
+    config = function() require('lsp') end
   }
 end)

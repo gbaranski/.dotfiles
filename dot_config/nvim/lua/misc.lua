@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.guifont = [[Fira\ Code\ Nerd\ Font:12]]
+
 nnoremap('<space><space>', '<C-^>') -- spc-spc to change switch between last buffers
 
 --Remap for dealing with word wrap
