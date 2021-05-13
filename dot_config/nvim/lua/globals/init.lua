@@ -7,6 +7,8 @@ function inoremap(key, cmd)
 end
 
 
+-- Comes from: https://github.com/tjdevries/config_manager
+
 --[[ To use a more declarative syntax, you could do something like this:
 
 local function set_opts(opts_table)

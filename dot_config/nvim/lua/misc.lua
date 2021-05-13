@@ -9,10 +9,14 @@ vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true,
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true})
 
 function _G.init_bufopts()
-  opt.signcolumn      = 'yes:1'
+  -- Most of these opts come from https://github.com/tjdevries/config_manager
+
+  opt.inccommand      = 'split' -- Nice popup when searching
+  opt.signcolumn      = 'yes:1' -- Enable sign column with width = 1
   opt.clipboard       = "unnamedplus" -- System clipboard
   opt.incsearch       = true  -- Makes search act like search in modern browsers
   opt.showmatch       = false -- Show matching parenthees
+  opt.showmode        = false -- Don't show current mode, I've got statusline for that
   opt.relativenumber  = true  -- Show line numbers relatively to currrent line
   opt.number          = true  -- Show current line number
   opt.ignorecase      = true  -- Ignore case when searching...
