@@ -95,7 +95,9 @@ return require('packer').startup(function()
       'nvim-lua/lsp_extensions.nvim', 
       'norcalli/snippets.nvim', 
       'glepnir/lspsaga.nvim', 
-      'nvim-lua/lsp-status.nvim' 
+      'nvim-lua/lsp-status.nvim',
+      'akinsho/flutter-tools.nvim',
+      'nvim-lua/plenary.nvim',
     },
     config = function() require('lsp') end
   }

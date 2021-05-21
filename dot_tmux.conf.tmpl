@@ -1,8 +1,31 @@
-# Fix colors
-# set-option -sa terminal-overrides ',xterm-256color:Tc'
 set -g default-terminal "tmux-256color"
-set -ag terminal-overrides ",xterm-256color:RGB"
+set -ga terminal-overrides ",*col*:Tc"
 set -g default-shell /bin/fish
+
+
+foreground='#e2e2e3'
+background='#2c2e34'
+border="#b39df3"
+indicator='#76cce0'
+indicator_highlighted='#fc5d7c'
+contrast='#7f8490'
+contrast_alt='#f39660'
+
+# Stolen from https://github.com/dracula/tmux
+set-option -g status-left-length 100
+set-option -g status-right-length 100
+set-option -g clock-mode-style 24
+set-option -g pane-active-border-style "fg=${border}"
+set-option -g pane-border-style "fg=${foreground}"
+set-option -g message-style "bg=${background},fg=${foreground}"
+set-option -g status-style "bg=${background},fg=${foreground}"
+set-window-option -g window-status-current-format "#[bg=${contrast}]#{?window_zoomed_flag,#[bg=${contrast_alt}],} #I #W "
+set-window-option -g window-status-format "#[fg=${foreground}]#[bg=${background}] #I #W${flags}"
+set-window-option -g window-status-activity-style "bold"
+set-window-option -g window-status-bell-style "bold"
+set-option -g status-left "#[bg=${indicator}]#{?client_prefix,#[bg=${indicator_highlighted}],}  "
+set-option -g  status-right ""
+set-option -ga status-right "#[fg=${foreground},bg=${contrast}] %a %d/%m %R ${timezone}"
 
 # VIM mode
 set -g mode-keys vi
@@ -27,8 +50,8 @@ bind - split-window -v    # Prefix - to create horizontal split
 
 # resize panes
 bind -r H resize-pane -L 5   # 5 px bigger to the left
-bind -r J resize-pane -D 5   # 5 px bigger down
-bind -r K resize-pane -U 5   # 5 px bigger up
+bind -r J resize-pane -D 2   # 5 px bigger down
+bind -r K resize-pane -U 2   # 5 px bigger up
 bind -r L resize-pane -R 5   # 5 px bigger right
 
 ###########################
@@ -45,7 +68,7 @@ bind -r L resize-pane -R 5   # 5 px bigger right
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'jabirali/tmux-tilish'
 
 # Other examples:
 # set -g @plugin 'github_username/plugin_name'

@@ -1,0 +1,54 @@
+evaluate-commands %sh{
+    plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
+plug "andreyorst/plug.kak" noload
+plug "andreyorst/fzf.kak"
+
+colorscheme gruvbox
+# set-face global Default rgb:ABB2BF,default
+
+add-highlighter global/ number-lines -relative -hlcursor # Relative numbers
+
+map global normal <c-p> ': fzf-mode<ret>'
+
+plug "kak-lsp/kak-lsp" do %{
+        cargo install --locked --force --path .
+}
+
+hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+        lsp-enable-window
+}
+
+map global user l %{: enter-user-mode lsp<ret>} -docstring "LSP mode"
+hook global WinSetOption filetype=rust %{
+    hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+    hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+    hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window rust-inlay-hints
+    }
+}
+
+hook global WinSetOption filetype=<language> %{
+    hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
+    hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+    hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+    hook -once -always window WinSetOption filetype=.* %{
+        remove-hooks window semantic-tokens
+    }
+}
+
+
+# def -hidden insert-c-n %{
+#      try %{
+#             lsp-snippets-select-next-placeholders
+#                exec '<a-;>d'
+#      } catch %{
+#         exec -with-hooks '<c-n>'
+#      }
+# }
+# map global insert <c-n> "<a-;>: insert-c-n<ret>"

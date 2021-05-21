@@ -22,7 +22,7 @@ exec libinput-gestures
 # Your preferred terminal emulator
 set $term alacritty
 set $menu j4-dmenu-desktop \
-          --term=Alacritty \
+          --term=$term \
           --dmenu='BEMENU_BACKEND=wayland bemenu -H 26 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282C34" --tf "#ABB2BF" --fb "#282C34" --ff "#61AFEF" --nb "#282C34" --nf "#61AFEF" --hb "#61AFEF" --hf "#282C34"' 
 
 
@@ -113,6 +113,7 @@ input "type:keyboard" {
     bindsym XF86AudioNext         exec playerctl next
     bindsym XF86AudioPrev         exec playerctl previous
     bindsym XF86Search            exec $menu
+    bindcode 248                  exec swaynag -t warning -m 'You pressed the lock button, what do you want to do?' -b 'Suspend computer' 'systemctl suspend' -b 'Start lockscreen' 'swaylock -f -c 000000'
     bindsym --release Print exec /usr/share/sway/scripts/grimshot copy area
     bindsym --release Shift+Print exec /usr/share/sway/scripts/grimshot save area ~/screenshots/$(date +%F_%H-%M-%S).png
 
@@ -244,9 +245,9 @@ bar {
     height 26
 
     colors {
-        background         #282C34CC
+        background         #2C2E34cc
         statusline         #FFFFFF
-        separator          #282C34
+        separator          #2C2E34
     }
 }
 

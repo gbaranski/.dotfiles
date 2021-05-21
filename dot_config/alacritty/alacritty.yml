@@ -1,40 +1,39 @@
-colors:
-  primary:
-    background: '#282c34'
-    foreground: '#abb2bf'
-  cursor:
-    text:       CellBackground
-    cursor:     '#528bff' # syntax-cursor-color
-  selection:
-    text:       CellForeground
-    background: '#3e4451' # syntax-selection-color
-  normal:
-    black:      '#5c6370' # mono-3
-    red:        '#e06c75' # red 1
-    green:      '#98c379'
-    yellow:     '#e5c07b' # orange 2
-    blue:       '#61afef'
-    magenta:    '#c678dd'
-    cyan:       '#56b6c2'
-    white:      '#828997' # mono-2
-  cursor:
-    text:   CellBackground
-    cursor: CellForeground
-  vi_mode_cursor:
-    text:   CellBackground
-    cursor: CellForeground
-
 font:
   normal:
-    family: Jetbrains Mono
-  size: 10
+    family: Fira Code Nerd Font
+    style: Regular
+  size: 12
+
+window:
+  colors:
+    primary:
+      background: '#2c2e34'
+      foreground: '#e2e2e3'
+    cursor:
+      text:       CellBackground
+      cursor:     '#fc5d7c'
+    selection:
+      text:       CellForeground
+      background: '#3e4451'
+    normal:
+      black:      '#181819'
+      red:        '#fc5d7c'
+      green:      '#9ed072'
+      yellow:     '#e7c664'
+      blue:       '#76cce0'
+      magenta:    '#b39df3'
+      cyan:       '#76cce0'
+      white:      '#e2e2e3'
+  decorations: none
+  startup_mode: Maximized
+
+# background_opacity: 0.8
 
 shell:
   program: /bin/fish
 
 env:
+  SHELL: /bin/fish
   TERM: xterm-256color
 
-key_bindings:
-  - { key: V, mods: Alt, action: Paste }
-  - { key: C, mods: Alt, action: Copy }
+

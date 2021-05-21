@@ -68,6 +68,14 @@ local on_attach = function(client, bufnr)
   end
 end
 
+
+require("flutter-tools").setup{
+  flutter_path = "/usr/bin/flutter",
+  lsp = {
+    on_attach = on_attach,
+  },
+}
+
 nvim_lsp.ccls.setup {
   on_attach = on_attach,
   root_dir = nvim_lsp.util.root_pattern("platformio.ini") or dirname,

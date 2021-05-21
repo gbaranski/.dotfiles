@@ -1,0 +1,20 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+# export MOZ_ENABLE_WAYLAND=1    # Firefox Wayland
+# export CLUTTER_BACKEND=wayland # Clutter Wayland
+# export SDL_VIDEDRIVER=wayland  # SDL2    Wayland
+# export XDG_SESSION_TYPE=wayland # For xdg-desktop-portal-wlr
+# export XDG_CURRENT_DESKTOP=sway # For xdg-desktop-portal-wlr
+
+# export PATH="$PATH:~/.cargo/bin"
+export EDITOR=nvim
+export BROWSER=firefox
+export BAT_PAGER="less -RF"
+export PAGER=bat
+
+# source /home/gbaranski/.config/broot/launcher/bash/br
+# . "$HOME/.cargo/env"
