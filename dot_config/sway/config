@@ -15,18 +15,18 @@ set $up k
 set $right l
 
 exec_always pkill kanshi; exec kanshi
-exec mako
-exec ydotoold
-exec libinput-gestures
+# exec mako
+# exec ydotoold
+# exec libinput-gestures
 
 # Your preferred terminal emulator
 set $term alacritty
 set $menu j4-dmenu-desktop \
           --term=$term \
-          --dmenu='BEMENU_BACKEND=wayland bemenu -H 26 -p run -i --ifne --fn "Jetbrains Mono 10" --tb "#282C34" --tf "#ABB2BF" --fb "#282C34" --ff "#61AFEF" --nb "#282C34" --nf "#61AFEF" --hb "#61AFEF" --hf "#282C34"' 
+          --dmenu='BEMENU_BACKEND=wayland bemenu -H 26 -p run -i --ifne --fn "FiraCode Nerd Font" --tb "#282C34" --tf "#ABB2BF" --fb "#282C34" --ff "#61AFEF" --nb "#282C34" --nf "#61AFEF" --hb "#61AFEF" --hf "#282C34"' 
 
 
-font pango:Jetbrains Mono
+font pango:FiraCode Nerd Font
 
 default_border pixel 2
 gaps inner 10
@@ -44,10 +44,10 @@ output * bg ~/.wallpaper.jpg fill
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
 
 # Example configuration:
 #

@@ -4,28 +4,30 @@ font:
     style: Regular
   size: 12
 
-window:
-  colors:
-    primary:
-      background: '#2c2e34'
-      foreground: '#e2e2e3'
-    cursor:
-      text:       CellBackground
-      cursor:     '#fc5d7c'
-    selection:
-      text:       CellForeground
-      background: '#3e4451'
-    normal:
-      black:      '#181819'
-      red:        '#fc5d7c'
-      green:      '#9ed072'
-      yellow:     '#e7c664'
-      blue:       '#76cce0'
-      magenta:    '#b39df3'
-      cyan:       '#76cce0'
-      white:      '#e2e2e3'
-  decorations: none
-  startup_mode: Maximized
+colors:
+  search:
+    bar:
+      background: '#282828'
+      foreground: '#eeeeec'
+  primary:
+    foreground: '#e2e2e3'
+  cursor:
+    text:       CellBackground
+    cursor:     CellForeground
+  selection:
+    text:       CellForeground
+    background: '#3e4451'
+  normal:
+    black:      '#181819'
+    red:        '#fc5d7c'
+    green:      '#9ed072'
+    yellow:     '#e7c664'
+    blue:       '#76cce0'
+    magenta:    '#b39df3'
+    cyan:       '#76cce0'
+    white:      '#e2e2e3'
+  # decorations: none
+  # startup_mode: Maximized
 
 # background_opacity: 0.8
 
