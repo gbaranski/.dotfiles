@@ -49,6 +49,14 @@ return require('packer').startup(function()
     config = function() require('colorscheme') end,
   }
 
+  use {
+      'lewis6991/gitsigns.nvim',
+      requires = {
+          'nvim-lua/plenary.nvim'
+      },
+      config = function() require('gitsigns').setup() end,
+  }
+
   -- Project/Files navigation
   use {
     'nvim-telescope/telescope.nvim',

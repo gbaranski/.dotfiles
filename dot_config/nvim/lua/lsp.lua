@@ -86,4 +86,19 @@ nvim_lsp.ccls.setup {
 
 nvim_lsp.rust_analyzer.setup {
   on_attach = on_attach,
+  settings = {
+      ["rust-analyzer"] = {
+          ["cargo"] = {
+              ["allFeatures"] = true
+          }
+      }
+  },
+}
+
+nvim_lsp.denols.setup {
+    on_attach = on_attach,
+}
+
+nvim_lsp.hls.setup {
+    on_attach = on_attach,
 }

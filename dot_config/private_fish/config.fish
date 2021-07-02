@@ -27,7 +27,7 @@ set -U fish_pager_color_description B3A06D yellow
 set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
 
-fish_add_path /opt/android-sdk/tools/bin
+fish_add_path ~/.cargo/bin
 
 function fish_mode_prompt
     # NOOP - Disable vim mode indicator
@@ -37,10 +37,6 @@ function fish_user_key_bindings
   fish_vi_key_bindings
 end
 
-
-# export GPG_TTY=(tty)
-
-alias sudo="doas"
 alias gst="git status"
 alias ga="git add"
 alias gaa="git add --all"
@@ -48,10 +44,7 @@ alias gah="git add ."
 alias gp="git push"
 alias gc="git commit -v"
 alias nano="echo 'fish: did you mean vim?'"
-alias ls="lsd"
-# alias gd="batdiff"
-# alias man="batman"
-# alias grep="batgrep"
+alias ls="exa --icons"
 
 alias tpl="trans en:pl"
 alias ten="trans pl:en"
